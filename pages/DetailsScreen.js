@@ -52,7 +52,7 @@ class DetailsScreen extends React.Component {
 							Select A Date in History
 						</Text> 
 					</SafeAreaView> 
-					: 
+					:
 					<SafeAreaView style={{ flex: 3 }}>
 						<View style={{ flex: 2, flexDirection: 'row', justifyContent: 'space-evenly'}}>
 							<View style={styles.timeCards}>

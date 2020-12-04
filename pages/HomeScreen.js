@@ -7,11 +7,13 @@ import {
   SafeAreaView,
   FlatList,
   TextInput,
-  Image
+  Image,
+  ActivityIndicator
 } from 'react-native';
 
 const HomeScreen = ({ navigation }) => {
-    const apiData = [];
+	const apiData = [];
+	const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
@@ -23,7 +25,8 @@ const HomeScreen = ({ navigation }) => {
 
             for (var key in responseJson.crypto) {
               	apiData.push(responseJson.crypto[key])
-            }
+			}
+			setIsLoading(false);
             setFilteredDataSource(apiData);
             setMasterDataSource(apiData);
         })
@@ -105,6 +108,19 @@ const ItemView = ({ item }) => {
           underlineColorAndroid="transparent"
           placeholder="Search Here"
         />
+
+		{ isLoading === true ? 
+			<View>
+				<ActivityIndicator 
+					size="large" 
+					color="#0000ff" 
+					animating={isLoading}
+					style={{ justifyContent: 'center', marginTop: '40%' }}
+				/>
+				<Text style={{ color: "#0000ff", textAlign: 'center', fontSize: 25, paddingTop: 20 }} >Loading . . . </Text>
+			</View>
+			: null
+		}
 
         <FlatList
 			data={filteredDataSource}

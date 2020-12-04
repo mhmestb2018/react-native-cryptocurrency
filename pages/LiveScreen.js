@@ -7,12 +7,14 @@ import {
   SafeAreaView,
   FlatList,
   TextInput,
+  ActivityIndicator
 } from 'react-native';
 import MaterialCommunityIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 
 
 const LiveScreen = ({ navigation }) => {
-    const apiData = [];
+	const apiData = [];
+	const [isLoading, setIsLoading] = useState(true);
     const [search, setSearch] = useState('');
     const [filteredDataSource, setFilteredDataSource] = useState([]);
     const [masterDataSource, setMasterDataSource] = useState([]);
@@ -40,7 +42,7 @@ const LiveScreen = ({ navigation }) => {
 				tempData.change_pct = responseJson.rates[key].change_pct ? responseJson.rates[key].change_pct.toFixed(3) : null;
 				apiData.push(tempData);
 			});
-
+			setIsLoading(false)
 			setFilteredDataSource(apiData);
 			setMasterDataSource(apiData);
         })
@@ -220,6 +222,18 @@ const ItemView = ({ item }) => {
           underlineColorAndroid="transparent"
           placeholder="Search Here"
         />
+		{ isLoading === true ? 
+			<View>
+				<ActivityIndicator 
+				size="large" 
+				color="#0000ff" 
+				animating={isLoading}
+				style={{ justifyContent: 'center', marginTop: '40%' }}
+			/>
+			<Text style={{ color: "#0000ff", textAlign: 'center', fontSize: 25, paddingTop: 20 }} >Loading . . . </Text>
+			</View>
+			: null
+		}
 
         <FlatList
 			data={filteredDataSource}
