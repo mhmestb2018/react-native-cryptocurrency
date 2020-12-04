@@ -2,7 +2,15 @@
 
 ## Demo / Preview
 
+<p style="float: left">
+    <img src="/demoImages/img1.jpg" width="24%" />
+    <img src="/demoImages/img2.jpg" width="24%" />
+    <img src="/demoImages/img3.jpg" width="24%" />
+    <img src="/demoImages/img4.jpg" width="24%" />
+</p>
+
 ### Let Get Started
+
     git clone https://github.com/LuffyAnshul/react-native-cryptocurrency.git
     cd react-native-cryptocurrency
     npm install
